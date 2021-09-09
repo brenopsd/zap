@@ -7,6 +7,15 @@ const path = require('path');
 const venom = require('venom-bot');
 const wppconnect = require('@wppconnect-team/wppconnect');
 const axios = require('axios');
+const chromiumArgs = [
+  '--disable-web-security', '--no-sandbox', '--disable-web-security',
+  '--aggressive-cache-discard', '--disable-cache', '--disable-application-cache',
+  '--disable-offline-load-stale-cache', '--disk-cache-size=0',
+  '--disable-background-networking', '--disable-default-apps', '--disable-extensions',
+  '--disable-sync', '--disable-translate', '--hide-scrollbars', '--metrics-recording-only',
+  '--mute-audio', '--no-first-run', '--safebrowsing-disable-auto-update',
+  '--ignore-certificate-errors', '--ignore-ssl-errors', '--ignore-certificate-errors-spki-list'
+];
 
 module.exports = class Sessions {
 
@@ -100,36 +109,7 @@ module.exports = class Sessions {
                 useChrome: false,
                 debug: false,
                 logQR: true,
-                browserArgs: [
-                    '--log-level=3',
-                    '--no-default-browser-check',
-                    '--disable-site-isolation-trials',
-                    '--no-experiments',
-                    '--ignore-gpu-blacklist',
-                    '--ignore-certificate-errors',
-                    '--ignore-certificate-errors-spki-list',
-                    '--disable-gpu',
-                    '--disable-extensions',
-                    '--disable-default-apps',
-                    '--enable-features=NetworkService',
-                    '--disable-setuid-sandbox',
-                    '--no-sandbox',
-                    // Extras
-                    '--disable-webgl',
-                    '--disable-threaded-animation',
-                    '--disable-threaded-scrolling',
-                    '--disable-in-process-stack-traces',
-                    '--disable-histogram-customizer',
-                    '--disable-gl-extensions',
-                    '--disable-composited-antialiasing',
-                    '--disable-canvas-aa',
-                    '--disable-3d-apis',
-                    '--disable-accelerated-2d-canvas',
-                    '--disable-accelerated-jpeg-decoding',
-                    '--disable-accelerated-mjpeg-decode',
-                    '--disable-app-list-dismiss-on-blur',
-                    '--disable-accelerated-video-decode',
-                ],
+                browserArgs: chromiumArgs,
                 refreshQR: 15000,
                 autoClose: 60000,
                 disableSpins: true,
